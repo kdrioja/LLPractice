@@ -1,17 +1,17 @@
 public class Main {
     public static void main(String[] args) {
-        ListNode a = new ListNode(2);
-        ListNode b = new ListNode(4);
-        ListNode c = new ListNode(3);
+        ListNode a = new ListNode(1);
+        //ListNode b = new ListNode(2);
+        ListNode c = new ListNode(4);
 
-        a.next = b;
-        b.next = c;
+        a.next = c;
+        //b.next = c;
         c.next = null;
 
         System.out.println(listToInt(a));
 
-        ListNode d = new ListNode(5);
-        ListNode e = new ListNode(6);
+        ListNode d = new ListNode(1);
+        ListNode e = new ListNode(3);
         ListNode f = new ListNode(4);
 
         d.next = e;
@@ -21,6 +21,8 @@ public class Main {
         System.out.println(listToInt(d));
         System.out.println(listToInt(addTwoNumbers(a, d)));
     }
+
+
 
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         int sum = listToInt(l1) + listToInt(l2);
