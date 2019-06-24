@@ -28,7 +28,62 @@ public class Main {
     }
 
     public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        return null;
+        //if both lists are empty
+        if (l1 == null && l2 == null) {
+            return null;
+        }
+        //if only l1 is empty
+        else if (l1 == null) {
+            return l2;
+        }
+        //if only l2 is empty
+        else if (l2 == null) {
+            return l1;
+        }
+        //if neither is empty
+        else {
+            ListNode head = new ListNode(-1), tail = head, pointer1 = l1, pointer2 = l2;
+            boolean flag1 = false, flag2 = false;
+
+            while (flag1 == false && flag2 == false) {
+                //if values are the same, append both
+                if (pointer1.val == pointer2.val) {
+                    tail.next = pointer1;
+                    tail = pointer1;
+                    pointer1 = pointer1.next;
+                    flag1 = pointer1 == null ? true : false;
+
+                    tail.next = pointer2;
+                    tail = pointer2;
+                    pointer2 = pointer2.next;
+                    flag2 = pointer2 == null ? true : false;
+                }
+                else if (pointer1.val < pointer2.val) {
+                    tail.next = pointer1;
+                    tail = pointer1;
+                    pointer1 = pointer1.next;
+                    flag1 = pointer1 == null ? true : false;
+                }
+                else {
+                    tail.next = pointer2;
+                    tail = pointer2;
+                    pointer2 = pointer2.next;
+                    flag2 = pointer2 == null ? true : false;
+                }
+            }
+
+            if (flag1 == flag2) { //both are true
+                return head.next;
+            }
+            else if (flag1) { //flag1 == true
+                tail.next = pointer2;
+                return head.next;
+            }
+            else {
+                tail.next = pointer1;
+                return head.next;
+            }
+        }
     }
 
 
