@@ -18,6 +18,7 @@ public class Main {
         //g.next = null;
 
         printList(a);
+        printList(removeDuplicates(a));
 
 
         /**
@@ -40,6 +41,7 @@ public class Main {
             }
             System.out.print("/");
         }
+        System.out.println();
     }
 
     /**
@@ -89,11 +91,48 @@ public class Main {
 
         ListNode dummyHead = new ListNode(0);
         ListNode tail = dummyHead;
+        ListNode slow = head, fast = head.next;
+        int lastValue = Integer.MIN_VALUE;
+
+        while (slow != null) {
+            if (fast != null) {
+
+                if (slow.val != fast.val && slow.val != lastValue) {
+                    //append to tail bc it is unique
+                    tail.next = slow;
+                    tail = slow;
+                }
+
+                //update last value seen
+                lastValue = slow.val;
+                //advance slow and fast
+                slow = fast;
+                fast = fast.next;
+
+            }
+            else { //fast was equal to null, so slow is last node
+                if (slow.val != lastValue) { //value is unique
+                    tail.next = slow;
+                    tail = slow;
+                }
+                //advance slow to null
+                slow = fast;
+            }
+        }
+
+        return dummyHead.next;
+        /*
+        ListNode dummyHead = new ListNode(0);
+        ListNode tail = dummyHead;
         ListNode current = head;
         int lastIntSeen = Integer.MIN_VALUE; //just a starting value
 
         while (current != null) {
-            if (current.val == current.next.val || current.val == lastIntSeen) {
+            if (current.next == null || current.val == lastIntSeen) {
+                lastIntSeen = current.val;
+                current = current.next;
+            }
+            else if (current.val == current.next.val || current.val == lastIntSeen) {
                 lastIntSeen = current.val;
                 current = current.next;
             }
@@ -105,6 +144,7 @@ public class Main {
         }
 
         return dummyHead.next;
+        */
     }
 
     public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
