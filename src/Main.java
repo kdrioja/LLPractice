@@ -121,30 +121,6 @@ public class Main {
         }
 
         return dummyHead.next;
-        /*
-        ListNode dummyHead = new ListNode(0);
-        ListNode tail = dummyHead;
-        ListNode current = head;
-        int lastIntSeen = Integer.MIN_VALUE; //just a starting value
-
-        while (current != null) {
-            if (current.next == null || current.val == lastIntSeen) {
-                lastIntSeen = current.val;
-                current = current.next;
-            }
-            else if (current.val == current.next.val || current.val == lastIntSeen) {
-                lastIntSeen = current.val;
-                current = current.next;
-            }
-            else {
-                lastIntSeen = current.val;
-                tail.next = current;
-                tail = current;
-            }
-        }
-
-        return dummyHead.next;
-        */
     }
 
     public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
@@ -206,7 +182,8 @@ public class Main {
         }
     }
 
-
+    //there is a more elegant solution than this
+    
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         int sum = listToInt(l1) + listToInt(l2);
         String sumStr = Integer.toString(sum);
