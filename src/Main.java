@@ -1,5 +1,6 @@
 public class Main {
     public static void main(String[] args) {
+        /**Testing removeDuplicates
         // l1
         ListNode a = new ListNode(1);
         ListNode b = new ListNode(2);
@@ -19,7 +20,7 @@ public class Main {
 
         printList(a);
         printList(removeDuplicates(a));
-
+        */
 
         /**
          * Testing addTwoNumbers
@@ -28,7 +29,47 @@ public class Main {
         System.out.println(listToInt(d));
         System.out.println(listToInt(addTwoNumbers(a, d)));
          */
+
+        ListNode a = new ListNode(1);
+        a.next = new ListNode(2);
+        a.next.next = new ListNode(3);
+        a.next.next.next = new ListNode(4);
+
+        printList(a);
     }
+
+    public static ListNode swapNodesInPairs(ListNode head) {
+        if (head == null) { //empty list
+            return null;
+        }
+        else if (head.next == null) { //only 1 element
+            return head;
+        }
+        else {//2 elements or more, so we will at least make 1 switch
+            ListNode first = head, //first element
+                    second = head.next, //second element
+                    next = second.next, //second.next
+                    prev = null,
+                    result = second;
+
+            while (first != null && second != null) {
+                if (prev != null) {
+                    prev.next = second;
+                }
+                second.next = first;
+                first.next = next;
+                prev = first;
+                first = next;
+
+                if (first != null) {
+                    second = first.next;
+                }
+            }
+            return result;
+        }
+    }
+
+
 
     public static void printList(ListNode head) {
         if (head == null) {
@@ -183,7 +224,7 @@ public class Main {
     }
 
     //there is a more elegant solution than this
-    
+
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         int sum = listToInt(l1) + listToInt(l2);
         String sumStr = Integer.toString(sum);
