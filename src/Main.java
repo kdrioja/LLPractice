@@ -33,36 +33,38 @@ public class Main {
         ListNode a = new ListNode(1);
         a.next = new ListNode(2);
         a.next.next = new ListNode(3);
-        a.next.next.next = new ListNode(4);
+        //a.next.next.next = new ListNode(4);
 
         printList(a);
+        printList(swapNodesInPairs(a));
     }
 
     public static ListNode swapNodesInPairs(ListNode head) {
         if (head == null) { //empty list
             return null;
-        }
-        else if (head.next == null) { //only 1 element
+        } else if (head.next == null) { //only 1 element
             return head;
-        }
+        } //1->2->3->4
         else {//2 elements or more, so we will at least make 1 switch
-            ListNode first = head, //first element
-                    second = head.next, //second element
-                    next = second.next, //second.next
-                    prev = null,
-                    result = second;
+            ListNode first = head, //first element              1
+                    second = head.next, //second element       2
+                    next = second.next, //second.next          3
+                    prev = null, //                            null
+                    result = second; //                        2
 
-            while (first != null && second != null) {
-                if (prev != null) {
-                    prev.next = second;
+            while (first != null && second != null) {//first = 1, second = 2;;;first = 3, second = 4
+                if (prev != null) {//prev is null;;;prev = 1
+                    prev.next = second; //2->1->4
                 }
-                second.next = first;
-                first.next = next;
-                prev = first;
-                first = next;
 
-                if (first != null) {
-                    second = first.next;
+                second.next = first; //2->1 ;;; 2->1->4->3
+                first.next = next; //2->1->3 ;;; 2->1->4
+                prev = first; //prev = 1
+                first = next; //first = 3
+
+                if (first != null) {//first is not null
+                    second = first.next; //second = 4
+                    next = (second == null) ? null : second.next; //next = null
                 }
             }
             return result;
